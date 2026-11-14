@@ -1,0 +1,616 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Nikhil Desai · Creative Technologist</title>
+<meta name="description" content="Portfolio of Nikhil Desai: AI production systems that ship finished video, documented so others can run them.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f3f0e8; --panel:#fbf9f4; --ink:#17150f; --ink2:#4a463c; --mute:#7a7466; --line:#ddd6c6;
+  --accent:#d9431f; --accent-ink:#ffffff; --ok:#2f7d4f; --chip:#ebe5d7;
+  --roi:#2b4fb8; --jc:#b8862b;
+  --display:"Bricolage Grotesque", ui-sans-serif, system-ui, sans-serif;
+  --body:"Instrument Sans", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono:"JetBrains Mono", ui-monospace, "SFMono-Regular", Consolas, monospace;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark){
+  :root{ --bg:#12110e; --panel:#1b1a16; --ink:#eee9de; --ink2:#c4bdae; --mute:#8f887a; --line:#2f2c25;
+    --accent:#ff6a45; --accent-ink:#12110e; --ok:#5cc28a; --chip:#262420; --roi:#7d9bff; --jc:#e2b357; color-scheme: dark; }
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 17px/1.6 var(--body);
+  padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px));}
+img,video{max-width:100%;display:block}
+a{color:inherit;text-decoration-color:var(--accent);text-underline-offset:3px}
+a:hover{color:var(--accent)}
+.wrap{max-width:1120px;margin:0 auto}
+.mono{font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase}
+h1,h2,h3{font-family:var(--display);line-height:1.05;margin:0;text-wrap:balance;letter-spacing:-.01em}
+p{margin:0}
+.muted{color:var(--mute)}
+
+/* top bar */
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:10;background:color-mix(in srgb, var(--bg) 90%, transparent);
+  backdrop-filter:blur(8px);border-bottom:1px solid var(--line);margin:0 calc(-1 * max(16px, env(safe-area-inset-left, 0px)))}
+.top .wrap{display:flex;gap:16px;align-items:center;justify-content:space-between;padding:12px max(16px, env(safe-area-inset-left, 0px))}
+.top .name{font-family:var(--display);font-weight:700;font-size:18px;text-decoration:none}
+.top nav{display:flex;gap:18px;flex-wrap:wrap}
+.top nav a{text-decoration:none;color:var(--ink2)}
+.top nav a:hover{color:var(--accent)}
+
+/* hero */
+.hero{padding-block:72px 40px;display:grid;gap:28px}
+.hero h1{font-size:clamp(40px, 6.4vw, 78px);font-weight:800;max-width:15ch}
+.hero h1 em{font-style:normal;color:var(--accent)}
+.hero .lede{font-size:clamp(18px,2vw,21px);color:var(--ink2);max-width:62ch}
+.facts{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:10px;overflow:hidden}
+.facts div{background:var(--panel);padding:16px 18px}
+.facts b{display:block;font-family:var(--display);font-size:30px;font-weight:700;line-height:1.1}
+.facts span{color:var(--mute);font-size:14px}
+
+/* gate strip */
+.gates{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.gate{font-family:var(--mono);font-size:12px;letter-spacing:.04em;padding:6px 10px;border:1px solid var(--line);border-radius:999px;background:var(--panel);white-space:nowrap}
+.gate i{font-style:normal;color:var(--ok);margin-right:6px}
+.gates .arrow{color:var(--mute);font-family:var(--mono)}
+
+/* index */
+.index{border-top:1px solid var(--ink);margin-top:24px}
+.index a{display:grid;grid-template-columns:48px minmax(0,1fr) auto;gap:16px;align-items:baseline;padding:14px 0;border-bottom:1px solid var(--line);text-decoration:none}
+.index a:hover .t{color:var(--accent)}
+.index .n{font-family:var(--mono);color:var(--mute)}
+.index .t{font-family:var(--display);font-size:22px;font-weight:700}
+.index .k{color:var(--mute);font-size:14px;text-align:right}
+
+/* project */
+.project{padding-block:88px 24px;border-top:1px solid var(--line)}
+.slate{display:grid;gap:14px;margin-bottom:32px}
+.slate .num{font-family:var(--mono);font-size:13px;color:var(--accent);letter-spacing:.08em}
+.slate h2{font-size:clamp(32px,4.6vw,54px);font-weight:800}
+.slate .one{font-size:20px;color:var(--ink2);max-width:60ch}
+.meta{display:flex;flex-wrap:wrap;gap:8px}
+.meta span{font-family:var(--mono);font-size:12px;background:var(--chip);padding:5px 9px;border-radius:6px;color:var(--ink2)}
+.cols{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:40px;align-items:start}
+.text{display:grid;gap:22px}
+.text h3{font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--mute);font-weight:600;margin-bottom:6px}
+.text p,.text li{color:var(--ink2)}
+.text ul{margin:0;padding-left:18px;display:grid;gap:6px}
+.made{border-left:3px solid var(--accent);padding:12px 16px;background:var(--panel);border-radius:0 8px 8px 0}
+.made h3{color:var(--accent)}
+figure{margin:0;display:grid;gap:8px}
+figcaption{font-size:13px;color:var(--mute)}
+.frame{border-radius:10px;overflow:hidden;border:1px solid var(--line);background:#000}
+.stack{display:grid;gap:20px}
+.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.grid4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.tall{aspect-ratio:9/16;object-fit:cover;width:100%}
+.wide{aspect-ratio:16/9;object-fit:cover;width:100%}
+.pix{image-rendering:pixelated}
+
+/* results table */
+.results{width:100%;border-collapse:collapse;font-size:15px}
+.results th,.results td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+.results th{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--mute);font-weight:600}
+.results td:first-child{color:var(--ink2)}
+.results td b{font-family:var(--display);font-size:18px}
+.scroll{overflow-x:auto}
+
+/* pipeline */
+.pipe{display:grid;gap:10px;margin-top:8px}
+.stage{display:grid;grid-template-columns:150px minmax(0,1fr) minmax(0,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:10px;overflow:hidden}
+.stage > div{background:var(--panel);padding:12px 14px;font-size:15px;color:var(--ink2)}
+.stage .s{font-family:var(--display);font-weight:700;color:var(--ink);font-size:17px}
+.stage .s small{display:block;font-family:var(--mono);font-size:11px;color:var(--mute);font-weight:400;letter-spacing:.04em;margin-top:2px}
+.pipe .head{background:transparent;border:0}
+.pipe .head > div{background:transparent;font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;padding:0 14px}
+.pipe .head .r{color:var(--roi)} .pipe .head .j{color:var(--jc)}
+.stage .shared{grid-column:2 / 4}
+.gaterow{display:flex;justify-content:center}
+.gaterow .gate{border-color:var(--ok);color:var(--ok);background:transparent}
+
+/* video cards */
+.vlist{display:grid;gap:10px}
+.vcard{display:grid;grid-template-columns:168px minmax(0,1fr);gap:14px;align-items:center;text-decoration:none;padding:8px;border:1px solid var(--line);border-radius:10px;background:var(--panel)}
+.vcard img{border-radius:6px;aspect-ratio:16/9;object-fit:cover;width:100%}
+.vcard b{display:block;font-weight:600;line-height:1.3}
+.vcard span{font-size:14px;color:var(--mute)}
+.vcard.fav{border-color:var(--accent)}
+
+.cta{display:inline-flex;gap:8px;align-items:center;font-weight:600;text-decoration:none;border:1px solid var(--ink);padding:9px 14px;border-radius:999px}
+.cta:hover{background:var(--ink);color:var(--bg)}
+.ctas{display:flex;gap:10px;flex-wrap:wrap}
+
+.quote{font-family:var(--display);font-size:24px;line-height:1.25;font-weight:500}
+
+/* about */
+.about{padding-block:88px 40px;border-top:1px solid var(--line)}
+.how{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px;margin-top:24px}
+.how div{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:14px}
+.how b{font-family:var(--display);display:block;font-size:18px;margin-bottom:4px}
+.how p{font-size:14px;color:var(--ink2)}
+.tools{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+.tools span{border:1px solid var(--line);border-radius:999px;padding:4px 10px;font-size:14px;color:var(--ink2)}
+footer{padding-block:40px 64px;border-top:1px solid var(--line);display:flex;flex-wrap:wrap;gap:16px;justify-content:space-between;color:var(--mute);font-size:14px}
+
+@media (max-width: 860px){
+  .cols{grid-template-columns:minmax(0,1fr)}
+  .facts{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .how{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .stage{grid-template-columns:minmax(0,1fr)}
+  .stage .shared{grid-column:auto}
+  .pipe .head{display:none}
+  .stage .r::before,.stage .j::before{display:block;font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;margin-bottom:4px}
+  .stage .r::before{content:"Republic of Ideas";color:var(--roi)}
+  .stage .j::before{content:"The Jackal's Counsel";color:var(--jc)}
+  .grid4{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .index .k{display:none}
+  .index a{grid-template-columns:40px minmax(0,1fr)}
+  .top nav{display:none}
+}
+@media (max-width: 480px){
+  body{font-size:16px}
+  .vcard{grid-template-columns:120px minmax(0,1fr)}
+  .grid3{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media (prefers-reduced-motion: reduce){ html{scroll-behavior:auto} }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <a class="name" href="#top">Nikhil Desai</a>
+    <nav aria-label="Sections">
+      <a href="#work">Work</a>
+      <a href="#about">How I work</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap" id="top">
+
+<section class="hero">
+  <p class="mono muted">Creative technologist · AI production systems · Mumbai, India</p>
+  <h1>I build AI systems that ship <em>finished</em> creative.</h1>
+  <p class="lede">I turn repeat creative work into pipelines with a human check at every stage, then write them down so someone else can run them. Right now one system runs two YouTube and Instagram brands with different looks, voices and tools. Before this I led videos for Builders Central, Zoho Creator's AI and no-code channel, and spent five years in digital marketing.</p>
+  <div class="facts" role="list">
+    <div role="listitem"><b>2 brands</b><span>run by one pipeline design</span></div>
+    <div role="listitem"><b>9 + 48</b><span>long-form videos and Shorts published since October</span></div>
+    <div role="listitem"><b>46K</b><span>views on YouTube and Instagram in the last 28–30 days</span></div>
+    <div role="listitem"><b>365K+</b><span>views on five Builders Central videos I led</span></div>
+  </div>
+  <div class="gates" aria-label="Every episode passes five sign-off gates">
+    <span class="gate"><i>✓</i>Script</span><span class="arrow">→</span>
+    <span class="gate"><i>✓</i>Voice</span><span class="arrow">→</span>
+    <span class="gate"><i>✓</i>First render</span><span class="arrow">→</span>
+    <span class="gate"><i>✓</i>Final render</span><span class="arrow">→</span>
+    <span class="gate"><i>✓</i>Packaging</span>
+  </div>
+
+  <div class="index" id="work">
+    <a href="#system"><span class="n">01</span><span class="t">One system, two brands</span><span class="k">AI production pipeline · documentation</span></a>
+    <a href="#roi"><span class="n">02</span><span class="t">Republic of Ideas: CHOKEPOINTS</span><span class="k">Explainers with two AI hosts</span></a>
+    <a href="#jackal"><span class="n">03</span><span class="t">The Jackal's Counsel</span><span class="k">Animated stories, art made in code</span></a>
+    <a href="#packaging"><span class="n">04</span><span class="t">The packaging kit</span><span class="k">Thumbnails, Reel covers, upload kits</span></a>
+    <a href="#yaas"><span class="n">05</span><span class="t">Builders Central (YAAS)</span><span class="k">Client work · 365K+ views</span></a>
+    <a href="#fourth-knock"><span class="n">06</span><span class="t">The Fourth Knock</span><span class="k">A browser game directed through AI</span></a>
+    <a href="#elevenreader"><span class="n">07</span><span class="t">ElevenReader ad concepts</span><span class="k">Spec work in a client's ad system</span></a>
+  </div>
+</section>
+
+<!-- 01 SYSTEM -->
+<section class="project" id="system">
+  <div class="slate">
+    <span class="num">01 · HEADLINE PROJECT</span>
+    <h2>One system, two brands</h2>
+    <p class="one">A production pipeline that takes an episode from topic to upload kit, used for two channels that look and sound nothing alike.</p>
+    <div class="meta"><span>Role: designer, director, operator</span><span>Oct–Nov 2026</span><span>Claude Code · ComfyUI · ElevenLabs API · Qwen3-TTS · IndexTTS-2 · Whisper · Stable Audio 3 · DaVinci Resolve Studio</span></div>
+  </div>
+
+  <div class="cols">
+    <div class="text">
+      <div>
+        <h3>The brief I set myself</h3>
+        <p>Publish a 9–13 minute video, 7–9 Reels and a full packaging set every week for two channels, alone, without the quality dropping. Most of each episode had to be repeatable. The judgement calls had to stay with a person.</p>
+      </div>
+      <div>
+        <h3>What I built</h3>
+        <ul>
+          <li><b>A script format the machine can read.</b> Every line has an ID, a speaker, an emotion tag and a visual cue (<code>C05 · KAI · (sceptical) · Wait. Says who?</code>). The voice, shot list, subtitles and Reels are all built from it.</li>
+          <li><b>One stage order, two tool stacks.</b> The stages and checks are the same for both brands. The voice and picture tools change with the brand (table below).</li>
+          <li><b>A shot list timed to the voice.</b> Shots are cued to words, not seconds (<code>@C05:insurance</code>), so a re-recorded line doesn't break the edit.</li>
+          <li><b>A packaging stage.</b> Three thumbnails for YouTube's Test &amp; Compare, Reel covers, an Instagram story and an upload kit with the schedule, description, sources and captions.</li>
+        </ul>
+      </div>
+      <div>
+        <h3>What good looks like, and how it's checked</h3>
+        <ul>
+          <li>Whisper transcribes every voice line and flags any that don't match the script.</li>
+          <li>Contact sheets of every shot and Reel are checked for text overlaps, safe areas and blank frames before anything renders at 4K.</li>
+          <li>A frame validator checks every rendered file. The mix is finished by hand in Resolve to about −14 LUFS.</li>
+          <li>Nothing moves on until I sign off the stage before it.</li>
+        </ul>
+      </div>
+      <div class="made">
+        <h3>What I did myself</h3>
+        <p>I designed the stages, wrote every brief and brand rule, set the quality bar and reviewed every output at every gate. I write and fact-check the scripts, clean the voice tracks and do the final edit and mix in DaVinci Resolve. Claude Code wrote the pipeline code (about 54,000 lines of Python) to my specs.</p>
+      </div>
+    </div>
+
+    <div class="stack">
+      <figure>
+        <div class="frame"><video src="media/roi_map_loop.mp4" poster="media/roi_map_poster.jpg" autoplay muted loop playsinline></video></div>
+        <figcaption>Republic of Ideas, Malacca episode: Kai cuts in, then Ira's map of the strait, with subtitles in the bottom bar.</figcaption>
+      </figure>
+      <figure>
+        <div class="frame"><video src="media/jc_trailer_loop.mp4" poster="media/jc_trailer_poster.jpg" autoplay muted loop playsinline></video></div>
+        <figcaption>The Jackal's Counsel trailer: the same pipeline, but every figure is drawn and animated in code as stone inlay.</figcaption>
+      </figure>
+    </div>
+  </div>
+
+  <div class="pipe" style="margin-top:40px">
+    <div class="stage head"><div></div><div class="r">Republic of Ideas</div><div class="j">The Jackal's Counsel</div></div>
+    <div class="stage"><div class="s">Script<small>receipts + line IDs</small></div><div class="shared">Topic with a news peg, a sourced claims list, a script in the line format and a table of Reels cut from existing lines.</div></div>
+    <div class="gaterow"><span class="gate">GATE 1 · SCRIPT APPROVED</span></div>
+    <div class="stage"><div class="s">Voice<small>one take per line</small></div><div class="r">ElevenLabs v4 through the API. Two host voices, an emotion tag per line, every generation and its credit cost logged.</div><div class="j">Voices designed from written character descriptions with Qwen3-TTS, then performed line by line with IndexTTS-2 and a written emotion direction. Both run locally; no voice actor or real person's voice is involved.</div></div>
+    <div class="stage"><div class="s">Voice check<small>Whisper</small></div><div class="shared">Every line is transcribed and compared with the script. I clean the voice track by hand, then it's cut back into one file per line.</div></div>
+    <div class="gaterow"><span class="gate">GATE 2 · VOICE APPROVED</span></div>
+    <div class="stage"><div class="s">Picture<small>4K, 16:9 + 9:16</small></div><div class="r">Backdrops painted with Z-Image in ComfyUI, then snapped to a 1280 pixel grid by a pixel engine. Maps are drawn from real coastline data.</div><div class="j">No generated images. Every figure is assembled from code-drawn "stones" (carnelian, jasper, lapis), so any piece can move or crack.</div></div>
+    <div class="stage"><div class="s">Contact sheets<small>before 4K renders</small></div><div class="shared">Sheets of every shot and Reel are checked for overlaps, safe areas and blank frames.</div></div>
+    <div class="gaterow"><span class="gate">GATE 3 · FIRST RENDER APPROVED</span></div>
+    <div class="stage"><div class="s">Score + sound<small>Stable Audio 3</small></div><div class="r">One cue per chapter: classical writing over walking jazz bass.</div><div class="j">Every episode uses the same key and tempo (D minor, 84 BPM), so the channel keeps one musical identity.</div></div>
+    <div class="stage"><div class="s">Finish<small>DaVinci Resolve Studio</small></div><div class="shared">Picture plus dialogue, music and SFX stems. A saved mix preset gets the loudness to about −14 LUFS. MP4 masters for YouTube and Instagram.</div></div>
+    <div class="gaterow"><span class="gate">GATE 4 · FINAL APPROVED</span></div>
+    <div class="stage"><div class="s">Package<small>upload kit</small></div><div class="shared">Three test thumbnails, Reel covers, a story image and an upload kit (schedule, title and backups, description with chapters and sources, tags, pinned comment, Reel captions).</div></div>
+    <div class="gaterow"><span class="gate">GATE 5 · PACKAGING APPROVED</span></div>
+  </div>
+
+  <div class="cols" style="margin-top:48px">
+    <div class="text">
+      <div>
+        <h3>Documented so someone else can run it</h3>
+        <p>Each channel has a bible that is the single source of truth for voice, look, type, sound, formats and every owner rule, plus a changelog. Republic of Ideas also has a handover guide (<code>START_HERE.md</code>) that takes a new editor, or an AI assistant, from topic to upload: where every file lives, every command in order and every rule that has caught a mistake before.</p>
+      </div>
+      <div>
+        <h3>Results so far</h3>
+        <div class="scroll">
+        <table class="results">
+          <thead><tr><th>14 Nov 2026</th><th>Republic of Ideas</th><th>The Jackal's Counsel</th></tr></thead>
+          <tbody>
+            <tr><td>Published on YouTube</td><td><b>5</b> long-form, <b>26</b> Shorts</td><td><b>4</b> long-form, <b>22</b> Shorts</td></tr>
+            <tr><td>YouTube views, 28 days</td><td><b>3.7K</b></td><td><b>11.3K</b></td></tr>
+            <tr><td>Instagram views, 30 days</td><td><b>7.4K</b></td><td><b>23.9K</b> (97% from non-followers)</td></tr>
+            <tr><td>Shorts: stayed to watch</td><td>46%</td><td>41%</td></tr>
+            <tr><td>Long-form click-through</td><td>2.5%</td><td>2.5% · average view 3:00</td></tr>
+            <tr><td>Cost per episode</td><td>About 9K ElevenLabs credits (Malacca); everything else runs locally</td><td>No paid API: open models on one PC</td></tr>
+          </tbody>
+        </table>
+        </div>
+        <p class="muted" style="margin-top:10px;font-size:14px">Both channels started in October 2026, so the audiences are still small. What these numbers show is output: a steady weekly schedule, two brands, one person.</p>
+      </div>
+    </div>
+    <div class="stack">
+      <figure>
+        <div class="frame"><img src="media/roi_bible.jpg" alt="The Republic of Ideas channel bible, opening section with instructions for editors and AI assistants" loading="lazy"></div>
+        <figcaption>The Republic of Ideas bible: 17 sections, written for "an editor, a designer or an AI assistant".</figcaption>
+      </figure>
+      <figure>
+        <div class="frame"><img src="media/jc_brandbook.jpg" alt="The Jackal's Counsel brand book cover with the jackal logo in a stone-inlay arch" loading="lazy"></div>
+        <figcaption>The Jackal's Counsel brand book: the "Court Inlay" look, defined before a single frame was made.</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- 02 ROI -->
+<section class="project" id="roi">
+  <div class="slate">
+    <span class="num">02</span>
+    <h2>Republic of Ideas: CHOKEPOINTS</h2>
+    <p class="one">An explainer series on the narrow places that run the world, hosted by two pixel-art AI characters: Ira, the researcher, and Kai, the sceptic.</p>
+    <div class="meta"><span>Role: writer, director, editor</span><span>YouTube + Instagram</span><span>ElevenLabs v4 API · ComfyUI (Z-Image) · Stable Audio 3 · Resolve</span></div>
+  </div>
+  <div class="cols">
+    <div class="text">
+      <div>
+        <h3>The challenge</h3>
+        <p>Make geopolitics watchable without a face on camera. The answer was two hosts who argue: Kai interrupts every 30–40 seconds ("Wait. Says who?"), which keeps viewers watching and makes Ira show her sources. The channel's bio says it plainly: AI hosts, every script written and fact-checked by a person.</p>
+      </div>
+      <div>
+        <h3>Episode 2: "China's 2.7 km Nightmare" (Malacca)</h3>
+        <ul>
+          <li>9:25, 92 shots, about 90 voice lines, 7 Reels, all in 4K.</li>
+          <li>A thousand years of history in one argument: an iron chain, Zheng He's depot, Portugal's "hand on the throat of Venice", and a stolen ship that gave us the law of the sea.</li>
+          <li>Every claim is sourced in the description, including a 2026 paper in <i>International Security</i> that challenged the idea the episode opens with.</li>
+        </ul>
+      </div>
+      <div>
+        <h3>Brand rules the pipeline enforces</h3>
+        <ul>
+          <li>Real maps with real geography. Ships stay on water.</li>
+          <li>Text stays inside title-safe, with no overlaps on any frame.</li>
+          <li>Five typefaces, each with one job (Pixelify Sans for headlines, VT323 for subtitles, and so on).</li>
+          <li>On Reels the bottom 22% stays clear of the app's buttons.</li>
+        </ul>
+      </div>
+      <div class="ctas">
+        <a class="cta" href="https://www.youtube.com/watch?v=qWnBTgenw8g" target="_blank" rel="noopener">Watch Malacca ↗</a>
+        <a class="cta" href="https://www.youtube.com/@republicofideas007" target="_blank" rel="noopener">Channel ↗</a>
+      </div>
+    </div>
+    <div class="stack">
+      <figure>
+        <div class="frame"><video src="media/roi_malacca_loop.mp4" poster="media/roi_malacca_poster.jpg" autoplay muted loop playsinline></video></div>
+        <figcaption>Malacca, 1511: a ComfyUI plate brought to life by the pixel engine.</figcaption>
+      </figure>
+      <div class="grid2">
+        <figure><div class="frame"><img src="media/roi_plate_raw.jpg" alt="Raw ComfyUI image of tankers at anchor at night" loading="lazy"></div><figcaption>1 · Raw Z-Image plate from ComfyUI</figcaption></figure>
+        <figure><div class="frame"><img src="media/roi_plate_px.jpg" alt="The same tanker scene after the pixel engine, cleaner and on a fixed grid" loading="lazy"></div><figcaption>2 · After the pixel engine: on the channel's grid and palette</figcaption></figure>
+      </div>
+      <figure>
+        <div class="frame"><img class="pix" src="media/roi_hosts.jpg" alt="Expression sheet of the two pixel-art hosts, Ira and Kai, six poses each" loading="lazy"></div>
+        <figcaption>The host rig: Ira and Kai, built in code with sets of expressions and head turns.</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- 03 JACKAL -->
+<section class="project" id="jackal">
+  <div class="slate">
+    <span class="num">03</span>
+    <h2>The Jackal's Counsel</h2>
+    <p class="one">1,700-year-old Indian stories (the Panchatantra, Vikram and Betaal) retold as counsel for modern life, in a world of polished stone inlay.</p>
+    <div class="meta"><span>Role: writer, art director, director, editor</span><span>YouTube + Instagram</span><span>Qwen3-TTS · IndexTTS-2 · Whisper · Stable Audio 3 · code-drawn art · Resolve</span></div>
+  </div>
+  <div class="cols">
+    <div class="text">
+      <div>
+        <h3>The challenge</h3>
+        <p>Give a second brand its own look and voice without building a second pipeline, and do it without paid generation. The look is <i>parchin kari</i>, Mughal stone inlay: every character is assembled from separate "stones" drawn in code, so a jackal can lean in, crack or fall apart on cue. No image in the brand is AI-painted.</p>
+      </div>
+      <div>
+        <h3>What changed from Republic of Ideas</h3>
+        <ul>
+          <li><b>Voices:</b> designed from written character briefs with Qwen3-TTS (three candidates per character, picked by ear), then performed with IndexTTS-2, one emotion direction per line.</li>
+          <li><b>Music:</b> every cue in D minor at 84 BPM, so the trailer and all episodes sound like one channel. Each story gets one signature sound (the drum in "The Hollow Drum", the broom in "The Man with the Broom").</li>
+          <li><b>Thumbnails:</b> I wrote a thumbnail playbook after studying YouTube Studio data and comparable channels. It changed the rules: one idea, one big face with one emotion, the channel's lapis-blue ground.</li>
+        </ul>
+      </div>
+      <div>
+        <h3>Results</h3>
+        <p>In its first month: 11.3K YouTube views and 23.9K Instagram views, almost all from people who don't follow the channel yet. Three Shorts passed 1,000 views each, and long-form viewers stay an average of 3 minutes.</p>
+      </div>
+      <div class="ctas">
+        <a class="cta" href="https://www.youtube.com/watch?v=HcKvzq-ecx8" target="_blank" rel="noopener">Watch episode 1 ↗</a>
+        <a class="cta" href="https://www.youtube.com/@thejackalscounsel" target="_blank" rel="noopener">Channel ↗</a>
+      </div>
+    </div>
+    <div class="stack">
+      <figure>
+        <div class="frame"><img src="media/jc_key.jpg" alt="Key art: a lion king under a parasol, a jackal and a bull, all in stone inlay inside a marble arch" loading="lazy"></div>
+        <figcaption>Key art for "The Lion, the Bull &amp; the Whisper". Every shape is drawn in code.</figcaption>
+      </figure>
+      <div class="grid3">
+        <figure><div class="frame" style="background:transparent;border:0"><img src="media/jc_damanaka.png" alt="Damanaka the jackal" loading="lazy"></div><figcaption>Damanaka</figcaption></figure>
+        <figure><div class="frame" style="background:transparent;border:0"><img src="media/jc_pingalaka.png" alt="Pingalaka the lion" loading="lazy"></div><figcaption>Pingalaka</figcaption></figure>
+        <figure><div class="frame" style="background:transparent;border:0"><img src="media/jc_sanjivaka.png" alt="Sanjivaka the bull" loading="lazy"></div><figcaption>Sanjivaka</figcaption></figure>
+      </div>
+      <figure>
+        <div class="frame"><img src="media/jc_vb_style.jpg" alt="Style frame for Vikram and Betaal in a shadow-puppet look" loading="lazy"></div>
+        <figcaption>A spin-off look for the Vikram and Betaal series: shadow puppets inside the same system.</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- 04 PACKAGING -->
+<section class="project" id="packaging">
+  <div class="slate">
+    <span class="num">04</span>
+    <h2>The packaging kit</h2>
+    <p class="one">The last stage of the pipeline: everything an episode needs to be found, generated from the same assets and checked like the video.</p>
+    <div class="meta"><span>Role: designer, strategist</span><span>Thumbnails · Reel covers · stories · carousels · upload kits</span></div>
+  </div>
+  <div class="cols">
+    <div class="text">
+      <div>
+        <h3>What one episode ships with</h3>
+        <ul>
+          <li>Three thumbnails, each with a different news angle, for YouTube's Test &amp; Compare. For Malacca: "China's weak spot", "USA vs China: the oil gap" and "India's island".</li>
+          <li>A cover for every Reel, in the same type treatment as the thumbnails, over a bright frame from that Reel.</li>
+          <li>An Instagram story with space left for the link sticker.</li>
+          <li>An upload kit: a release schedule (two Reels before the long-form, then one a day), a title with two backups if CTR is under 3% after 1,000 impressions, a description with chapters and sources, tags, cards, a pinned comment and every Reel caption.</li>
+        </ul>
+      </div>
+      <div>
+        <h3>Why it's a stage, not an afterthought</h3>
+        <p>On The Jackal's Counsel, Shorts get about 10% click-through and long-form about 2.5%. The stories hold people once they click; the packaging is what loses them. So packaging gets its own sign-off gate and its own written rules, like the thumbnail playbook.</p>
+      </div>
+    </div>
+    <div class="stack">
+      <div class="grid3">
+        <figure><div class="frame"><img class="wide" src="media/roi_thumb_A.jpg" alt="Thumbnail A: China's weak spot, 2.7 km wide" loading="lazy"></div><figcaption>A · main</figcaption></figure>
+        <figure><div class="frame"><img class="wide" src="media/roi_thumb_B.jpg" alt="Thumbnail B: USA vs China, the oil gap" loading="lazy"></div><figcaption>B · test</figcaption></figure>
+        <figure><div class="frame"><img class="wide" src="media/roi_thumb_C.jpg" alt="Thumbnail C: India's island, China's fear" loading="lazy"></div><figcaption>C · test</figcaption></figure>
+      </div>
+      <div class="grid4">
+        <img class="tall frame" src="media/roi_cover_4.jpg" alt="Reel cover: Freedom of the seas began with a robbery" loading="lazy">
+        <img class="tall frame" src="media/roi_cover_h3.jpg" alt="Republic of Ideas Reel cover from the Hormuz episode" loading="lazy">
+        <img class="tall frame" src="media/jc_cover_M01.jpg" alt="Jackal's Counsel Reel cover" loading="lazy">
+        <img class="tall frame" src="media/jc_cover_v3.jpg" alt="Jackal's Counsel Reel cover from The Man with the Broom" loading="lazy">
+      </div>
+      <div class="grid3">
+        <figure><div class="frame"><img class="wide" src="media/jc_thumb_v1.jpg" alt="Jackal's Counsel episode 1 thumbnail" loading="lazy"></div></figure>
+        <figure><div class="frame"><img class="wide" src="media/jc_thumb_v2.jpg" alt="Jackal's Counsel thumbnail: What made that sound?" loading="lazy"></div></figure>
+        <figure><div class="frame"><img class="wide" src="media/jc_thumb_vb1.jpg" alt="Vikram and Betaal episode 1 thumbnail" loading="lazy"></div></figure>
+      </div>
+      <figure>
+        <div class="frame"><img src="media/jc_carousel.jpg" alt="Nine-slide Instagram launch carousel shown as one panorama" loading="lazy"></div>
+        <figcaption>The Jackal's Counsel launch carousel: nine slides that join into one panorama.</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- 05 YAAS -->
+<section class="project" id="yaas">
+  <div class="slate">
+    <span class="num">05 · CLIENT WORK</span>
+    <h2>Builders Central, by Zoho Creator</h2>
+    <p class="one">At YAAS (YouTube as a Service) I led videos for Zoho Creator's AI and no-code channel (177K subscribers), from script to final edit.</p>
+    <div class="meta"><span>YAAS · Video Editor, then Creative Engineer</span><span>Feb 2025 – Sep 2026</span><span>Script · shoot planning · edit · motion graphics · colour · sound</span></div>
+  </div>
+  <div class="cols">
+    <div class="text">
+      <div>
+        <h3>The job</h3>
+        <p>Make tutorials about AI and no-code tools (n8n, MCP, Claude, Cursor, Lovable) that a non-developer can follow and still wants to watch to the end. Each video had to explain a real build, step by step, inside the client's brand.</p>
+      </div>
+      <div>
+        <h3>The one I'm proudest of</h3>
+        <p>"This is How Google Is Secretly Winning the AI Race." I worked on the script, planned the shoot and the whole edit, and made the intro myself. The intro tells Google's AI comeback in under two minutes: a search box, the Gemini spark, a wall of real "what happened to Bard?" threads, the Transformer diagram Google's researchers invented, and an obituary for Google AI that the rest of the video takes back. The video earned me appreciation from the company.</p>
+      </div>
+      <div class="vlist">
+        <a class="vcard fav" href="https://youtu.be/nXnXNG7oSjE" target="_blank" rel="noopener"><img src="https://i.ytimg.com/vi/nXnXNG7oSjE/mqdefault.jpg" alt="" loading="lazy"><div><b>How Google Is Secretly Winning the AI Race</b><span>21K views · my favourite</span></div></a>
+        <a class="vcard" href="https://youtu.be/YvBaRWzOyqM" target="_blank" rel="noopener"><img src="https://i.ytimg.com/vi/YvBaRWzOyqM/mqdefault.jpg" alt="" loading="lazy"><div><b>How I Steal Startup Ideas From Reddit (n8n + no-code)</b><span>118K views</span></div></a>
+        <a class="vcard" href="https://youtu.be/-c3kAOZX2mI" target="_blank" rel="noopener"><img src="https://i.ytimg.com/vi/-c3kAOZX2mI/mqdefault.jpg" alt="" loading="lazy"><div><b>Launch Your App in Minutes (Claude 4 + Lovable + Cursor)</b><span>110K views</span></div></a>
+        <a class="vcard" href="https://youtu.be/e3MX7HoGXug" target="_blank" rel="noopener"><img src="https://i.ytimg.com/vi/e3MX7HoGXug/mqdefault.jpg" alt="" loading="lazy"><div><b>Model Context Protocol (MCP), Clearly Explained</b><span>96K views</span></div></a>
+        <a class="vcard" href="https://youtu.be/kgTz7bPevsU" target="_blank" rel="noopener"><img src="https://i.ytimg.com/vi/kgTz7bPevsU/mqdefault.jpg" alt="" loading="lazy"><div><b>We Built a Game Without Coding (Grok 3 + Cursor)</b><span>20K views</span></div></a>
+      </div>
+    </div>
+    <div class="stack">
+      <figure><div class="frame"><img src="media/yaas_google_spark.jpg" alt="The Google wordmark with the Gemini spark taking the place of one letter, on a black grid" loading="lazy"></div><figcaption>Intro · the Gemini spark moves into Google's own name</figcaption></figure>
+      <figure><div class="frame"><img src="media/yaas_dot_matrix.jpg" alt="Two figures in a stand-off, drawn in white dot-matrix on black" loading="lazy"></div><figcaption>Intro · a dot-matrix stand-off</figcaption></figure>
+      <div class="grid2">
+        <figure><div class="frame"><img src="media/yaas_ball_pass.jpg" alt="Two block-headed characters passing a glowing ball on a black grid" loading="lazy"></div><figcaption>The lead changes hands</figcaption></figure>
+        <figure><div class="frame"><img src="media/yaas_ctrl_failure.jpg" alt="The same two characters pressing Ctrl and Z around the word Failure" loading="lazy"></div><figcaption>Ctrl + Failure + Z</figcaption></figure>
+        <figure><div class="frame"><img src="media/yaas_obituary.jpg" alt="Animated eyes over an obituary card for Google AI" loading="lazy"></div><figcaption>The obituary</figcaption></figure>
+        <figure><div class="frame"><img src="media/yaas_spark_dots.jpg" alt="The Gemini spark filled with a pattern of moving dots" loading="lazy"></div><figcaption>The Gemini spark comes alive</figcaption></figure>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 06 FOURTH KNOCK -->
+<section class="project" id="fourth-knock">
+  <div class="slate">
+    <span class="num">06</span>
+    <h2>The Fourth Knock</h2>
+    <p class="one">A short goofy-noir murder mystery that plays in the browser, creative-directed through an AI production pipeline.</p>
+    <div class="meta"><span>Role: creative director, AI production director</span><span>Story · game design · 3D · animation · 98 voice lines · original score</span></div>
+  </div>
+  <div class="cols">
+    <div class="text">
+      <div>
+        <h3>The question underneath</h3>
+        <p>Can AI systems be directed like a multidisciplinary team instead of being used as separate generators? One creative direction had to survive story, mystery design, mechanics, illustration, 3D, animation, voice, music and code, across handoffs, failed approaches and pivots, and arrive as a game you can finish in about 18 minutes.</p>
+      </div>
+      <div>
+        <h3>A decision that shows how I direct</h3>
+        <p>The locked-room trick first relied on a cord pulled under a door. The AI answered with a physics simulation: 619 cord segments, 128 solver iterations, and it still failed its own accuracy check. I rejected it for an ordinary spring night latch the player works in three steps. Use the cheapest reliable system that gives the player the experience you want.</p>
+      </div>
+      <div class="ctas">
+        <a class="cta" href="https://nikhilsatishdesai.github.io/the-fourth-knock/" target="_blank" rel="noopener">Read the case study ↗</a>
+        <a class="cta" href="https://nikhilsatishdesai.github.io/the-fourth-knock/play/" target="_blank" rel="noopener">Play it ↗</a>
+      </div>
+    </div>
+    <div class="stack">
+      <figure><div class="frame"><img src="https://nikhilsatishdesai.github.io/the-fourth-knock/media/img/hero-house-1280.webp" alt="Cedar House at night in the monsoon, from the game" loading="lazy"></div><figcaption>Cedar House, cut off by the 1999 monsoon.</figcaption></figure>
+      <figure><div class="frame"><img src="https://nikhilsatishdesai.github.io/the-fourth-knock/media/img/cast-portrait-1280.webp" alt="The cast of creature characters from the game" loading="lazy"></div><figcaption>The cast. Every character is voiced; 98 lines in all.</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<!-- 07 ELEVENREADER -->
+<section class="project" id="elevenreader">
+  <div class="slate">
+    <span class="num">07 · SPEC WORK</span>
+    <h2>ElevenReader ad concepts</h2>
+    <p class="one">Paid-social concepts for ElevenLabs' reading app, made in the brand's own ad system with the brand's own models. Spec work, not affiliated with ElevenLabs.</p>
+    <div class="meta"><span>Role: strategist, producer, editor</span><span>Oct 2026</span><span>ElevenLabs voice + music + Flows · Figma · Resolve</span></div>
+  </div>
+  <div class="cols">
+    <div class="text">
+      <div>
+        <h3>The brief I set myself</h3>
+        <p>Study what ElevenReader runs on Meta today, find what it doesn't say yet, and make concepts that would sit in its feed without looking out of place.</p>
+      </div>
+      <div>
+        <h3>What I made</h3>
+        <ul>
+          <li>Two video concepts, one cut three ways to test the hook.</li>
+          <li>Six statics rebuilt in ElevenLabs' paid-social style: calm gradient grounds, two-tone type, one frosted-glass UI object.</li>
+          <li>A launch and test plan for Meta, Google and Reddit, with no made-up predictions.</li>
+        </ul>
+      </div>
+      <div>
+        <h3>Why it's here</h3>
+        <p>It's the closest thing to customer work in this portfolio: learn someone else's brand system fast, then produce inside it.</p>
+      </div>
+      <div class="ctas"><a class="cta" href="https://nikhilsatishdesai.github.io/elevenreader-spec-sprint/" target="_blank" rel="noopener">See the concepts ↗</a></div>
+    </div>
+    <div class="grid2">
+      <img class="tall frame" src="media/er_posterA.jpg" alt="Video A poster: a woman listening on her phone with a translucent reading panel" loading="lazy">
+      <img class="tall frame" src="media/er_posterB.jpg" alt="Video B poster: one sentence in four voices" loading="lazy">
+      <img class="frame" src="media/er_static.jpg" alt="Static ad: one story, every voice" loading="lazy">
+      <img class="frame" src="media/er_static2.jpg" alt="Static ad: four hours, zero pages" loading="lazy">
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="slate">
+    <span class="num">HOW I WORK</span>
+    <h2>From a repeat request to a system that runs</h2>
+    <p class="one">I've worked agency-side and in-house. What carries across is one habit: when something gets made twice, I build the system and write down how to run it.</p>
+  </div>
+  <div class="how">
+    <div><b>Scope</b><p>What repeats, what must stay a human call, and what "good" looks like, written down first.</p></div>
+    <div><b>Build</b><p>The cheapest reliable tool for each stage: an API, an open model, ComfyUI, code or a person.</p></div>
+    <div><b>Check</b><p>A sign-off gate after every stage, plus automatic checks (transcripts, contact sheets, frame validation).</p></div>
+    <div><b>Document</b><p>A bible and a handover guide, kept current with a changelog.</p></div>
+    <div><b>Hand over</b><p>Written for the next person, or the next AI assistant, to run without me.</p></div>
+  </div>
+  <div class="cols" style="margin-top:40px">
+    <div class="text">
+      <div>
+        <h3>Background</h3>
+        <p>Five years in digital marketing (2016–2021): funnels, paid budgets, weekly reporting and campaigns for small businesses in the UK, US, Canada and Australia. Then a full-time break for India's civil services exam, which gave me the research and writing habit behind Republic of Ideas. Since 2025: video and AI production, first at YAAS, now on my own channels.</p>
+      </div>
+    </div>
+    <div class="text">
+      <div>
+        <h3>Tools</h3>
+        <div class="tools">
+          <span>Claude Code</span><span>ComfyUI</span><span>ElevenLabs API</span><span>Qwen3-TTS</span><span>IndexTTS-2</span><span>Whisper</span><span>Stable Audio 3</span><span>Z-Image</span><span>ffmpeg</span><span>DaVinci Resolve Studio</span><span>Premiere Pro</span><span>After Effects</span><span>Photoshop</span><span>Figma</span><span>Meta Ads Manager</span><span>Google Ads</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="wrap" id="contact">
+  <div>
+    <p style="color:var(--ink);font-family:var(--display);font-size:22px;font-weight:700">Nikhil Desai</p>
+    <p>Mumbai, India · happy to work European hours</p>
+  </div>
+  <div style="display:grid;gap:4px;text-align:right">
+    <span>nikhilsatishdesai@gmail.com</span>
+    <a href="https://www.linkedin.com/in/nikhil-desai-3593b156/" target="_blank" rel="noopener">LinkedIn ↗</a>
+  </div>
+</footer>
+</body>
+</html>
