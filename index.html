@@ -207,6 +207,8 @@ footer{padding-block:40px 64px;border-top:1px solid var(--line);display:flex;fle
   <div class="index" id="work">
     <a href="#system"><span class="n">01</span><span class="t">One system, two brands</span><span class="k">AI production pipeline · documentation</span></a>
     <a href="#workflows"><span class="n">01+</span><span class="t">The ComfyUI workflows, opened up</span><span class="k">Graphs, outputs, a custom node</span></a>
+    <a href="#posters"><span class="n">01+</span><span class="t">Monsoon campaign posters</span><span class="k">Photoreal plates, bold type</span></a>
+    <a href="#brief"><span class="n">01+</span><span class="t">One brief → every format</span><span class="k">Brand creative at scale, with QC</span></a>
     <a href="#video"><span class="n">01+</span><span class="t">Video generation with Kling</span><span class="k">Photoreal, archival, model comparison</span></a>
     <a href="#roi"><span class="n">02</span><span class="t">Republic of Ideas: CHOKEPOINTS</span><span class="k">Explainers with two AI hosts</span></a>
     <a href="#jackal"><span class="n">03</span><span class="t">The Jackal's Counsel</span><span class="k">Animated stories, art made in code</span></a>
@@ -387,6 +389,70 @@ footer{padding-block:40px 64px;border-top:1px solid var(--line);display:flex;fle
     <div class="made">
       <h3>How these were built</h3>
       <p>I chose the models, wrote the prompts, house styles and character briefs, designed the node's behaviour and reviewed every output. Claude Code is my coding partner: it wrote the Python that drives ComfyUI and the node's implementation.</p>
+    </div>
+  </div>
+</section>
+
+<!-- POSTERS -->
+<section class="project" id="posters">
+  <div class="slate">
+    <span class="num">01+ · CAMPAIGN POSTERS</span>
+    <h2>Monsoon campaign posters</h2>
+    <p class="one">A four-poster set for a fictional sportswear brand, TAAL Athletics. Each athlete is shot on a plain studio backdrop with Z-Image and cut out with BiRefNet in the same ComfyUI graph. The poster is then built in layers: a colour field, giant type behind the athlete, the cutout in front, then headline, copy, product, price, series number, barcode and grain.</p>
+    <div class="meta"><span>Z-Image Turbo · BiRefNet · Python layout</span><span>2:3 · 1080×1620</span><span>TAAL Athletics is fictional</span></div>
+  </div>
+  <div class="grid4">
+    <img class="frame" src="media/poster_rain.jpg" alt="Poster: Rain is fuel, a sprinter running through monsoon rain" loading="lazy">
+    <img class="frame" src="media/poster_over.jpg" alt="Poster: One more over, a fast bowler under floodlights" loading="lazy">
+    <img class="frame" src="media/poster_splash.jpg" alt="Poster: Built for wet roads, a running shoe in a burst of water" loading="lazy">
+    <img class="frame" src="media/poster_mud.jpg" alt="Poster: Mud is a myth, a goalkeeper's diving save" loading="lazy">
+  </div>
+  <div class="cols" style="margin-top:32px">
+    <div class="text">
+      <div>
+        <h3>Brand safety is part of the pipeline</h3>
+        <p>The prompts said "unbranded", but the model still drew real-looking marks: a famous sportswear logo on the sprinter's top, a team-style crest and sponsor patch on the bowler, and logo-like marks on the keeper's kit. A review pass found every one, and a script paints them out from the surrounding fabric. For the sprinter, where the logo sits against skin, it selects only the logo's own pixels. The originals are kept for the record.</p>
+      </div>
+      <div>
+        <h3>And a judgement call</h3>
+        <p>The first footballer prompt asked for a "bicycle kick", and the model drew an actual bicycle, twice. Adding "no bicycles" made it worse, because this model doesn't use a negative prompt: naming the bicycle puts it in. The fix was a different shot, a goalkeeper's diving save, which carries the same "Mud is a myth" idea.</p>
+      </div>
+    </div>
+    <figure><div class="frame"><img src="media/poster_process.jpg" alt="Studio plate, BiRefNet mask and finished poster side by side" loading="lazy"></div><figcaption>Studio plate → BiRefNet cutout → finished poster.</figcaption></figure>
+  </div>
+  <figure style="margin-top:32px"><div class="frame"><img src="media/sports_wf.jpg" alt="The poster plate workflow in ComfyUI: Z-Image render, then BiRefNet background removal, saving the image and its mask" loading="lazy"></div><figcaption>The poster workflow in ComfyUI: one graph renders the studio plate with Z-Image, then BiRefNet cuts it out, saving the plate and its mask. This is the shoe from poster 03, at its real seed.</figcaption></figure>
+</section>
+
+<!-- BRIEF: one brief every format -->
+<section class="project" id="brief">
+  <div class="slate">
+    <span class="num">01+ · BRAND CREATIVE AT SCALE</span>
+    <h2>One brief → every format</h2>
+    <p class="one">A cold brew launch, built once and delivered to four placements. ComfyUI renders the product and the serve, a script wraps the brand's label onto the can and lays out each format from a template, and automatic checks decide whether each file can ship.</p>
+    <div class="meta"><span>ComfyUI · Z-Image Turbo · BiRefNet · Python brand layer</span><span>Feed 1:1 · Feed 4:5 · Story 9:16 · Banner 16:9</span><span>Drizzle &amp; Bean is a fictional brand made for this demo</span></div>
+  </div>
+
+  <figure><div class="frame"><img src="media/ad_every_format.jpg" alt="A cold brew can campaign in four formats: square, portrait, story and banner" loading="lazy"></div><figcaption>One campaign, four placements. Each layout is set for its format, not cropped from one master.</figcaption></figure>
+
+  <div class="cols" style="margin-top:32px">
+    <div class="text">
+      <div>
+        <h3>How it works</h3>
+        <ul>
+          <li><b>Plates in ComfyUI.</b> A tall can with a deliberately blank label, and a poured glass with ice and beans, are rendered on a studio backdrop and cut out with BiRefNet in the same graph as the sports posters.</li>
+          <li><b>The label goes on in code.</b> The brand's label is designed flat, then wrapped around the can's curve and multiplied by the can's own lighting, so the highlight and shading stay real. Generating it instead would mean garbled lettering and a different can every time.</li>
+          <li><b>One template per placement</b> sets where the can, the serve, the giant word behind it, the headline, the badges, the price and the CTA sit. On Stories the top 14% and bottom 20% stay clear of the app's buttons.</li>
+          <li><b>Automatic QC</b> on every file: text inside the safe area, contrast at WCAG AA (4.5:1 for normal text, 3:1 for large or bold ≥ 19 px) and minimum type size.</li>
+        </ul>
+      </div>
+      <div>
+        <h3>What the checks caught</h3>
+        <p>On the first run every format failed. The logo sat on top of the giant word, the story's buttons fell into the app's UI zone, and the price badge ran past the square's safe margin. I moved the word below the logo, lifted the story copy and kept the badge inside the margin. All four now pass. A first version of this campaign, a photo-style bottle by a rainy window, passed its checks but looked flat, so I rebuilt it around the product.</p>
+      </div>
+    </div>
+    <div class="stack">
+      <figure><div class="frame"><img src="media/brew_label.jpg" alt="The blank can plate from ComfyUI next to the same can with the brand label wrapped on" loading="lazy"></div><figcaption>Blank can from ComfyUI → label wrapped onto its curve, keeping the original lighting.</figcaption></figure>
+      <figure><div class="frame"><img src="media/brew_wf.jpg" alt="The can plate workflow in ComfyUI: Z-Image render, then BiRefNet cutout" loading="lazy"></div><figcaption>The can's workflow in ComfyUI: render, then cutout, at its real seed.</figcaption></figure>
     </div>
   </div>
 </section>
